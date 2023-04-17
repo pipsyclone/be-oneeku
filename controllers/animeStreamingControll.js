@@ -60,7 +60,7 @@ export const popularAnime = (req, res) => {
         res.send({status: 200, msg: "OK", data : popular})
     })
     .catch((error) => {
-        res.send({status: 500, msg: error.message})
+        res.send({status: 500, msg: "Error On Popular"})
     })
 }
 
@@ -195,7 +195,7 @@ export const newEpisodes = (req, res) => {
         res.send({status: 200, msg: "OK", data : newEps})
     })
     .catch((error) => {
-        res.send({status: 500, msg: error.message})
+        res.send({status: 500, msg: "Error On New Episodes"})
     })
 }
 
