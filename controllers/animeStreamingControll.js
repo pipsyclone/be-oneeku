@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
 import axios from 'axios';
 
-const baseURL =  'https://oploverz.top';
+const baseURL =  'https://oploverz.best';
 // const baseURL =  'https://15.235.11.45';
 
 function convertText (text) {
@@ -45,7 +45,7 @@ export const popularAnime = (req, res) => {
         const popular = []
 
         $('.listupd .excstf article').slice(0, 4).each((i, element) => {
-            const slug     = $(element).find('.bsx a').attr('href').slice(21, -1);
+            const slug     = $(element).find('.bsx a').attr('href').slice(22, -1);
             const title    = $(element).find('.bsx a .limit .egghead .eggtitle').text();
             const type     = $(element).find('.bsx a .limit .egghead .eggtype').text();
             const status   = $(element).find('.bsx a .limit .status').text();
@@ -60,7 +60,7 @@ export const popularAnime = (req, res) => {
         res.send({status: 200, msg: "OK", data : popular})
     })
     .catch((error) => {
-        res.send({status: 500, msg: "Error On Popular"})
+        res.send({status: 500, msg: error.message})
     })
 }
 
@@ -72,7 +72,7 @@ export const animeByGenre = (req, res) => {
             const animeByGenre = []
 
             $('.listupd article').each((i, element) => {
-                const slug     = $(element).find('.bsx a').attr('href').slice(27, -1);
+                const slug     = $(element).find('.bsx a').attr('href').slice(28, -1);
                 const title    = $(element).find('.bsx a .tt h2').text();
                 const type     = $(element).find('.bsx a .limit .typez').text();
                 const status   = $(element).find('.bsx a .limit .status').text();
@@ -100,7 +100,7 @@ export const searchAnime = (req, res) => {
         const search = []
 
         $('.listupd article').each((i, element) => {
-            const slug     = $(element).find('.bsx a').attr('href').slice(27, -1);
+            const slug     = $(element).find('.bsx a').attr('href').slice(28, -1);
             const title    = $(element).find('.bsx a .tt h2').text();
             const type     = $(element).find('.bsx a .limit .typez').text();
             const status   = $(element).find('.bsx a .limit .bt .epx').text();
@@ -149,7 +149,7 @@ export const viewAnime = (req, res) => {
         })
 
         $('.epcheck .eplister ul li').each((i, element) => {
-            const epsSlug  = $(element).find('a').attr('href').slice(21, -1);
+            const epsSlug  = $(element).find('a').attr('href').slice(22, -1);
             const epsNum   = parseInt($(element).find('a .epl-num').text());
             const epsTitle = $(element).find('a .epl-title').text();
             const epsDate  = $(element).find('a .epl-date').text();
@@ -180,7 +180,7 @@ export const newEpisodes = (req, res) => {
         const newEps = []
 
         $('.listupd .excstf article').slice(4).each((i, element) => {
-            const slug     = $(element).find('.bsx .thumb a').attr('href').slice(21, -1);
+            const slug     = $(element).find('.bsx .thumb a').attr('href').slice(22, -1);
             const title    = $(element).find('.bsx .inf h2 a').text();
             const type     = $(element).find('.bsx .thumb a .typez').text();
             const rating   = parseFloat($(element).find('.bsx .upscore .scr').text());
@@ -195,7 +195,7 @@ export const newEpisodes = (req, res) => {
         res.send({status: 200, msg: "OK", data : newEps})
     })
     .catch((error) => {
-        res.send({status: 500, msg: "Error On New Episodes"})
+        res.send({status: 500, msg: error.message})
     })
 }
 
@@ -204,7 +204,7 @@ export const watchAnime = (req, res) => {
     .then((response) => {
         const $ = cheerio.load(response)
         const watchAnime = []
-        const slug       = $('.megavid .mvelement .naveps .nvsc a').attr('href').slice(27, -1);
+        const slug       = $('.megavid .mvelement .naveps .nvsc a').attr('href').slice(28, -1);
         const series     = $('.single-info .infox .infolimit h2').text();
         const title      = $('.megavid .mvelement .item .lm .title-section .entry-title').text();
         const released   = $('.megavid .mvelement .item .lm .year .updated').text();
@@ -217,18 +217,18 @@ export const watchAnime = (req, res) => {
                 slug, series, title, released, vidURL, prev: false, next: false
             })
         }else if (!nextEps) {
-            const prev   = $('.megavid .mvelement .naveps .nvs [rel=prev]').attr('href').slice(21, -1);
+            const prev   = $('.megavid .mvelement .naveps .nvs [rel=prev]').attr('href').slice(22, -1);
             watchAnime.push({
                 slug, series, title, released, vidURL, prev, next: false
             })
         }else if (!prevEps) {
-            const next   = $('.megavid .mvelement .naveps .nvs [rel=next]').attr('href').slice(21, -1);
+            const next   = $('.megavid .mvelement .naveps .nvs [rel=next]').attr('href').slice(22, -1);
             watchAnime.push({
                 slug, series, title, released, vidURL, prev: false, next
             })
         }else {
-            const prev   = $('.megavid .mvelement .naveps .nvs [rel=prev]').attr('href').slice(21, -1);
-            const next   = $('.megavid .mvelement .naveps .nvs [rel=next]').attr('href').slice(21, -1);
+            const prev   = $('.megavid .mvelement .naveps .nvs [rel=prev]').attr('href').slice(22, -1);
+            const next   = $('.megavid .mvelement .naveps .nvs [rel=next]').attr('href').slice(22, -1);
             watchAnime.push({
                 slug, series, title, released, vidURL, prev, next
             })
