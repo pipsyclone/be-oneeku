@@ -6,7 +6,7 @@ const app = express()
 const developmentURL    = "http://localhost:3000";
 const productionURL     = "https://oneeku.vercel.app";
 const corsOptions = {
-    origin : productionURL,
+    origin : developmentURL,
     credentials: true
 }
 
